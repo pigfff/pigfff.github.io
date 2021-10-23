@@ -317,32 +317,47 @@ var _hmt = _hmt || [];
 &#125;
 </code></pre>
 <ul>
-<li><p>常量：一旦被定义并赋值后，它的值就不能再被改变，主要利用关键字<code>final</code>来定义常量        </p>
+<li>常量：一旦被定义并赋值后，它的值就不能再被改变，主要利用关键字<code>final</code>来定义常量        </li>
+<li>变量      <ul>
+<li>成员变量 : 在类体中定义的变量是成员变量 ,作用于整个类。</li>
+<li>局部变量 : 在一个函数 (或称方法) 或函数代码块中 定义的变量成为 局部变量 , 局部变量在函数或代码块被执行时创建, 在函数或代码块结束时被销毁。      </li>
+</ul>
 </li>
-<li><p>变量      </p>
+</ul>
+<pre><code class="java">public class Demo2 &#123;
+    static final double PI = 3.14;//常量 final；常量名一般使用大写字符。
+    static int allClicks = 0;   // 类静态变量 static
+    String str = &quot;hello world&quot;;
+    // 实例变量:从属于对象：实例变量：从属于对象；如果不自行初始化，这个类型的默认值 0 0.0
+    // 布尔值：默认是 faLse
+    // 除了基本类型，其余的都是null
+    public static void main(String[] args) &#123;
+        Demo2 demo2 = new Demo2();// 变量类型 变量名字 = new Demo2();
+        System.out.println(demo2.str);
+        // 类变量 static
+        System.out.println(allClicks);
+
+        System.out.println(Demo2_1.D2_1);
+        //System.out.println(Demo2_1.D2_2);//报错
+    &#125;
+&#125;
+class Demo2_1&#123;
+    static int D2_1=222;//
+    int D2_2=1111;
+&#125;
+</code></pre>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>类型转换要注意：    </p>
+<ol>
+<li> 不能对布尔类型转换        </li>
+<li> 不能将对象类型转换为不相干的类型      </li>
+<li> 在把高容量转换到低容量时，强制转换                </li>
+<li> 转换的时候可能存在内存溢出，或者精度问题！</li>
+</ol>
 <ul>
-<li><p>成员变量 : 在类体中定义的变量是成员变量 ,作用于整个类。</p>
-</li>
-<li><p>局部变量 : 在一个函数 (或称方法) 或函数代码块中 定义的变量成为 局部变量 , 局部变量在函数或代码块被执行时创建, 在函数或代码块结束时被销毁 .<br>```java<br>public class Demo2 {<br>static final double PI = 3.14;//常量 final；常量名一般使用大写字符。<br>static int allClicks = 0;   // 类静态变量 static<br>String str = “hello world”;<br>// 实例变量:从属于对象：实例变量：从属于对象；如果不自行初始化，这个类型的默认值 0 0.0<br>// 布尔值：默认是 faLse<br>// 除了基本类型，其余的都是null<br>public static void main(String[] args) {<br>  Demo2 demo2 = new Demo2();// 变量类型 变量名字 = new Demo2();<br>  System.out.println(demo2.str);<br>  // 类变量 static<br>  System.out.println(allClicks);</p>
-<p>  System.out.println(Demo2_1.D2_1);<br>  //System.out.println(Demo2_1.D2_2);//报错<br>}<br>}<br>class Demo2_1{<br>static int D2_1=222;//<br>int D2_2=1111;<br>}</p>
-</li>
+<li>低 ——–&gt; 高 </li>
+<li>byte -&gt; short -&gt; char -&gt; int -&gt; long -&gt; float -&gt; double </li>
 </ul>
-</li>
-</ul>
-<pre><code>
-
-### 类型转换        
-类型转换要注意：    
-1.  不能对布尔类型转换        
-2.  不能将对象类型转换为不相干的类型      
-3.  在把高容量转换到低容量时，强制转换                
-4.  转换的时候可能存在内存溢出，或者精度问题！
-
-+ 低 --------&gt; 高 
-+ byte -&gt; short -&gt; char -&gt; int -&gt; long -&gt; float -&gt; double 
-
-```java     
-public class Demo3 &#123;
+<pre><code class="java">public class Demo3 &#123;
     public static void main(String args[]) &#123;
         int i=128 ;
         //byte b= byte(i);//强制类型转换 高--&gt;低 超范围溢出会报错
@@ -398,20 +413,23 @@ public class Demo3 &#123;
 <li>三元运算:<code> x ？ y : z</code>如果x==true,则结果为y，否则结果为z</li>
 </ul>
 <h2 id="控制流程"><a href="#控制流程" class="headerlink" title="控制流程"></a>控制流程</h2><ul>
-<li><p>条件语句</p>
+<li>条件语句      </li>
+</ul>
 <pre><code>if (判断) &#123; &#125;else if(判断)&#123;执行&#125;else &#123;执行&#125;
 </code></pre>
-</li>
-<li><p>循环<br>警告：循环中检测两个浮点数是否相等时要格外小心，由于舍入可能得不到精确值。</p>
+<ul>
+<li>循环<br>警告：循环中检测两个浮点数是否相等时要格外小心，由于舍入可能得不到精确值。      </li>
+</ul>
 <pre><code>do&#123; &#125;while();//先执行再
 while ()&#123; &#125;;//先判断再执行
 for(初始化;布尔表达式;更新)&#123;
-  // 代码语句
+    // 代码语句
 &#125;
 </code></pre>
 <p>警告：循环中检测两个浮点数是否相等时要格外小心，由于舍入可能得不到精确值。</p>
-</li>
-<li><p>多重选择：switch 语句</p>
+<ul>
+<li>多重选择：switch 语句     </li>
+</ul>
 <pre><code>//当条件满足则会进行输出，用break进行阻断如果没有相匹配的 case 标签，而有 default 语句，就执行这个子句
 switch (2)&#123; 
 case 1:&#123;&#125;;
@@ -419,9 +437,8 @@ case 2:&#123;&#125;;
 case 3:&#123;&#125;;
 default:&#123;&#125;
 </code></pre>
-</li>
-<li><p>中断控制流程语句</p>
 <ul>
+<li>中断控制流程语句<ul>
 <li>break:在任何循环语句的主体部分，均可用 break控制循环的流程。 ==break用于强行退出循环==，不执行循环中剩余的语句。（ break语句也在 switch语句中使用。</li>
 <li>continue:语句用在循环语句体中，==用于终止某次循环过程==，即跳过循环体中尚未执行的语句，接着进行下一次是否执行循环的判定。</li>
 </ul>
@@ -432,11 +449,11 @@ default:&#123;&#125;
 int a[] = new int[n];
 </code></pre>
 <ul>
-<li>多维数组<br>java 实际上没一维有多维数组，只有数组，多维数组被解释成“数组的数组”     <pre><code>int a[][] = &#123;&#123;1,2,3&#125;,&#123;1,2,3&#125;,&#123;1,2,3,4,5,6,7,8,9&#125; &#125;;
+<li>多维数组<br>java 实际上没一维有多维数组，只有数组，多维数组被解释成“数组的数组”     </li>
+</ul>
+<pre><code>int a[][] = &#123;&#123;1,2,3&#125;,&#123;1,2,3&#125;,&#123;1,2,3,4,5,6,7,8,9&#125; &#125;;
 a[2][8]=9 #第三个数组的的第9位
 </code></pre>
-</li>
-</ul>
 <h2 id="输入与输出"><a href="#输入与输出" class="headerlink" title="输入与输出"></a>输入与输出</h2><h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><p>标准输入：<code>Scanner in = new Scanner(System.in);</code><br>方法：</p>
 <ul>
 <li>nextLine():下一行</li>
