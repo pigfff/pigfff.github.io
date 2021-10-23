@@ -259,7 +259,7 @@ var _hmt = _hmt || [];
 </div>
 
 <div id="article-content">
-	<h1 id="java基础"><a href="#java基础" class="headerlink" title="java基础"></a>java基础</h1><p>本博客仅为个人笔记录，肯定不能满足你所需要的知识内容完全获取。肯定会有错误内容，仅供参考，并建议以<a target="_blank" rel="noopener" href="https://www.oracle.com/cn/java/technologies/java-se-api-doc.html">Java SE API</a>文档作为主要学习内容。     </p>
+	<h1 id="java基础设计"><a href="#java基础设计" class="headerlink" title="java基础设计"></a>java基础设计</h1><p>本博客仅为个人笔记录，肯定不能满足你所需要的知识内容完全获取。肯定会有错误内容，仅供参考，并建议以<a target="_blank" rel="noopener" href="https://www.oracle.com/cn/java/technologies/java-se-api-doc.html">Java SE API</a>文档作为主要学习内容。     </p>
 <p>Java的三大版本<br>JavaSE：标准版（桌面程序，控制台开发……）<br>JavaME：嵌入式开发（手机、小家电……）<br>JavaEE：E企业级开发（Web端、服务器开发……）  </p>
 <h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="数据类型介绍"><a href="#数据类型介绍" class="headerlink" title="数据类型介绍"></a>数据类型介绍</h3><ul>
 <li>整型<ul>
@@ -479,6 +479,365 @@ a[2][8]=9 #第三个数组的的第9位
         PW.println(&quot;中文Test123&quot;);
         PW.close();
     &#125;
+&#125;
+</code></pre>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul>
+<li>设计方法的原则：方法的本意是功能块，就是实现某个功能的语句块的集合。我们设计方法的时候，最好保持方法的原子性，==就是一个方法只完成1个功能，这样利于我们后期的扩展==</li>
+<li>一个前提:方法在主类中定义,并且由主方法直接调用          <pre><code>方法体：方法体包含具体的语句，定义该方法的功能。
+修饰符 返回值类型 方法名(参数类型 参数名)&#123;
+  ...
+  方法体
+  ...
+  return 返回值;
+&#125;
+#调用方法：对象名.方法名（实参列表）3
+</code></pre>
+</li>
+</ul>
+<h3 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h3><ul>
+<li>private：仅对本类可见</li>
+<li>public：对所有类可见</li>
+<li>接口里方法默认 public</li>
+<li>protected：对本包和所有子类可见</li>
+<li>default：对本包可见</li>
+<li>一个方法可以访问所属类的所有对象的私有对象</li>
+<li>final<ul>
+<li>final 域（常量）</li>
+<li>final 域必须显式指定初始值，赋值后，不能被重新赋值。</li>
+<li>基本类型：final 使数值不变</li>
+<li>引用类型：final 使引用不变，但是被引用的对象本身是可以修改的</li>
+<li>final 方法</li>
+<li>final 方法可以被子类继承，但是不能被子类修改。</li>
+<li>private 方法隐式地被指定为 final，如果在子类中定义的方法和基类中的一个 private 方法签名相同，此时子类的方法不是重写基类方法，而是在子类中定义了一个新的方法。 </li>
+</ul>
+</li>
+<li>static关键字<ul>
+<li>可以通过类名称直接调用。static属性虽然定义在类之中,但是其并不受到类实例化对象的控制(可以直接在类使用)。</li>
+<li>static方法只允许调用static属性或static方法; </li>
+<li>非static方法允许调用static属性或static方法;       </li>
+</ul>
+</li>
+</ul>
+<h3 id="方法的重载"><a href="#方法的重载" class="headerlink" title="方法的重载"></a>方法的重载</h3><p>方法重载的定义:当方法名称相同,参数的类型或个数不同的时候就称为方法的重载，开发习惯方法重载返回值类型相同。         </p>
+<pre><code class="java">public class Demo8 &#123;
+    public static int add(int a,int b)&#123;
+        return a+b;
+    &#125;
+    public static int add2(int a,int b,int c)&#123;
+        return a+b+c;
+    &#125;
+    public static void main(String[] args) &#123;
+        int sum = add(1, 2);
+        System.out.println(sum);
+        int sum2 = add2(1, 2, 3);
+        System.out.println(sum2);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>递归就是：A方法调用A方法！就是自己调用自己。        </p>
+<ul>
+<li>递归结构包括两个部分：<ul>
+<li>递归头：什么时候不调用自身方法。如果没有头，将陷入死循环；    </li>
+<li>递归体：什么时候需要调用自身方法。      </li>
+</ul>
+</li>
+</ul>
+<pre><code class="java">public class Demo9 &#123;
+    // 5! 5*4*3*2*1
+    public static void main(String[] args) &#123;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(&quot;请输入一个数:&quot;);
+        int number = scanner.nextInt();
+        int test = test(number);
+        System.out.println(number + &quot;的阶乘:&quot; + test);
+    &#125;
+    public static int test(int n)&#123;
+        if(n==1)&#123;
+            return 1;
+        &#125;else&#123;
+            return n*test(n-1);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h1 id="对象与类"><a href="#对象与类" class="headerlink" title="对象与类"></a>对象与类</h1><ul>
+<li>面向过程思想<ul>
+<li>步骤清晰简单，第一步做什么，第二步做什么…</li>
+<li>面对过程适合处理一些较为简单的问题。</li>
+</ul>
+</li>
+<li>面向对象编程（ Object- Oriented Programming,OOP）</li>
+<li>面向对象编程的本质就是：<strong>以类的方式组织代码，以对象的组织（封装）数据</strong>。  </li>
+<li>三大特征：<ul>
+<li>继承</li>
+<li>封装</li>
+<li>多态</li>
+</ul>
+</li>
+</ul>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ul>
+<li>如果在Java程序之中要想实现继承关系,那么就必须依靠extends关键字定义：<code>class子类extends父类&#123;&#125;</code></li>
+<li>特别需要注意的是,很多情况下会把子类称为派生类， 把父类称为超类(SuperClass)</li>
+<li>super()表示的就是子类构造调用父类构造的语句,该语句只允许放在子类构造方法的首行。在默认情况下的实例化处理,子类只会调用父类中的无参构造方法,所以写与不写”super()”区别不大,<strong>但是如果说你的父类里面没有提供无参构造,这个须利用super()明确调用有参构造</strong>。</li>
+<li>在实例化子类对象的同时一定会实例化父类对象,super与this都可以调用构造方法, super是由子类调用父类的构造,而this是调用本类,两个语句都要放在首行,所以<strong>两个语句不允许同时出现</strong>。      </li>
+</ul>
+<ul>
+<li>多重继承      </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">错误继承</th>
+<th align="left">正确继承</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">class A{}</td>
+<td align="left">class A{}</td>
+</tr>
+<tr>
+<td align="left">class B{}</td>
+<td align="left">class B extends A</td>
+</tr>
+<tr>
+<td align="left">class C extends A,B{}</td>
+<td align="left">class C extends B</td>
+</tr>
+</tbody></table>
+<ul>
+<li>覆写</li>
+<li>只要是在子类中调用父类方法的时候一定要在方法前追加有<code>super.方法()</code>。       </li>
+<li>复写/重写：存在于继承体系中，指子类实现了一个与父类在方法声明上完全相同的一个方法     <ul>
+<li>子类方法的访问权限必须大于等于父类方法；</li>
+<li>子类方法的返回类型必须是父类方法返回类型或为其子类型。</li>
+<li>子类方法抛出的异常类型必须是父类抛出异常类型或为其子类型。</li>
+<li>使用 <code>@Override</code> 注解，可以让编译器帮忙检查是否满足上面的三个限制条件。 </li>
+</ul>
+</li>
+</ul>
+<pre><code class="java">class Channel&#123;
+
+    public void connect()&#123;
+        System.out.println(&quot;*******Channl********&quot;);
+    &#125;
+&#125;
+class DatabaeChannel extends Channel&#123;
+    @Override //明确方法是复写，检测的作用
+    public void connect()&#123;
+        System.out.println(&quot;*****子类*****&quot;);
+
+    &#125;
+&#125;
+class DatabaeChannel2 extends Channel&#123;
+    @Override //明确方法是复写，检测的作用
+    public void connect()&#123;
+        System.out.println(&quot;*****子类2*****&quot;);
+
+    &#125;
+&#125;
+
+
+public class Annotation_Override &#123;
+    public static void main(String args[]) &#123;
+        DatabaeChannel dcha=new DatabaeChannel();
+        dcha.connect();
+        Channel cha =new DatabaeChannel();//向上转型
+        cha.connect();
+        fun(new DatabaeChannel());// Channel msg =new DatabaeChannel()
+        fun(new DatabaeChannel2());
+
+        Channel test =new DatabaeChannel();
+        test.connect();
+        DatabaeChannel test2 = (DatabaeChannel) test;
+        test2.connect();
+
+
+
+    &#125;
+
+    public static void fun(Channel msg) &#123;
+        msg.connect();
+
+    &#125;
+&#125;
+</code></pre>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><ul>
+<li>抽象类不能被实例化(初学者很容易犯的错)，如果被实例化，就会报错，编译无法通过。只有抽象类的非抽象子类可以创建对象。</li>
+<li>抽象类中不一定包含抽象方法，但是有抽象方法的类必定是抽象类。</li>
+<li>抽象类中的抽象方法只是声明，不包含方法体，就是不给出方法的具体实现也就是方法的具体功能。</li>
+<li>构造方法，类方法（用 static 修饰的方法）不能声明为抽象方法。</li>
+<li>继承抽象方法的子类必须重写该方法，除非该子类也是抽象类。</li>
+<li>抽象类之中主要的目的是进行过渡操作使用,所以当你要使用抽象类进行开发的时解决继承问题时所带来的代码重复处理。</li>
+<li>static方法永远不受到实例化对象或结构的限制,永远可以直接通过类名称进行调用     </li>
+</ul>
+<pre><code class="java">public class H_abstract &#123;
+    public static void main(String args[]) &#123;
+        Message msg=new DatabaseMessage();
+        msg.setType(&quot;获取信息&quot;);
+        System.out.println(msg.getConnectInfo());
+        System.out.println(msg.getType());
+
+        Message msg2 =Message.getInstance();
+        System.out.println(msg.getConnectInfo());
+
+
+    &#125;
+&#125;
+
+abstract  class Message&#123;//抽象类
+    private String type;
+    public abstract String getConnectInfo();//抽象方法
+    public static Message getInstance()&#123;
+        return new DatabaseMessage();
+    &#125;;
+    public void setType(String type)&#123;//普通方法
+        this.type=type;
+    &#125;
+    public String getType()&#123;
+        return this.type;
+    &#125;
+
+&#125;
+class DatabaseMessage extends Message&#123;
+    public String getConnectInfo()&#123;
+        return  &quot;数据库方法&quot;;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h2><ul>
+<li>在Java之中对于多态性有两种实现的模式:<ul>
+<li>方法的多态性: .<ul>
+<li>方法的重载:同一个方法名称可以根据传入的参数的类型或个数的不同实现不同功能的执行</li>
+<li>方法的覆写:同一个方法可能根据使用子类的不同有不同的实现;      </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>向下转型  必须先上再向下       <pre><code>Channel test =new DatabaeChannel();
+test.connect();
+DatabaeChannel test2 = (DatabaeChannel) test;
+test2.connect2();
+</code></pre>
+</li>
+<li>对象的多态性:父子实例之间的转换处理,它有两种模式:<ul>
+<li>对象向上转型:父类父类实例-子类实例、自动完成转换;</li>
+<li>对象向下转型:子类子类实例-(子类)父类实例、强制完成转换.       </li>
+</ul>
+</li>
+</ul>
+<pre><code class="java">class Channel&#123;
+
+    public void connect()&#123;
+        System.out.println(&quot;*******Channl********&quot;);
+    &#125;
+&#125;
+class DatabaeChannel extends Channel&#123;
+    @Override //明确方法是复写，检测的作用
+    public void connect()&#123;
+        System.out.println(&quot;*****子类*****&quot;);
+
+    &#125;
+&#125;
+class DatabaeChannel2 extends Channel&#123;
+    @Override //明确方法是复写，检测的作用
+    public void connect()&#123;
+        System.out.println(&quot;*****子类2*****&quot;);
+
+    &#125;
+&#125;
+public class Annotation_Override &#123;
+    public static void main(String args[]) &#123;
+        DatabaeChannel dcha=new DatabaeChannel();
+        dcha.connect();
+        Channel cha =new DatabaeChannel();//向上转型
+        cha.connect();
+        fun(new DatabaeChannel());
+        fun(new DatabaeChannel2());
+    &#125;
+    public static void fun(Channel msg) &#123;
+        msg.connect();
+    &#125;
+&#125;
+</code></pre>
+<ul>
+<li><strong>Object</strong>        <blockquote>
+<p><strong>所有的引用数据类型实际上都可以使用Objet类进行接收,包括数组也可以。</strong></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
+<li>接口与类相似点：<ul>
+<li>一个接口可以有多个方法。</li>
+<li>接口文件保存在 .java 结尾的文件中，文件名使用接口名。</li>
+<li>接口的字节码文件保存在 .class 结尾的文件中。</li>
+<li>接口相应的字节码文件必须在与包名称相匹配的目录结构中。</li>
+</ul>
+</li>
+<li>接口与类的区别：<ul>
+<li>接口不能用于实例化对象。</li>
+<li>接口没有构造方法。</li>
+<li>接口中所有的方法必须是抽象方法，Java 8 之后 接口中可以使用 default 关键字修饰的非抽象方法。</li>
+<li>接口不能包含成员变量，除了 static 和 final 变量。</li>
+<li>接口不是被类继承了，而是要被类实现。</li>
+<li>接口支持多继承。</li>
+</ul>
+</li>
+<li>接口特性<ul>
+<li>接口中每一个方法也是隐式抽象的,接口中的方法会被隐式的指定为 public abstract（只能是 public abstract，其他修饰符都会报错）。</li>
+<li>接口中可以含有变量，但是接口中的变量会被隐式的指定为 public static final 变量（并且只能是 public，用 private 修饰会报编译错误）。</li>
+<li>接口中的方法是不能在接口中实现的，只能由实现接口的类来实现接口中的方法。</li>
+</ul>
+</li>
+<li>抽象类和接口的区别<ul>
+<li>抽象类中的方法可以有方法体，就是能实现方法的具体功能，但是接口中的方法不行。</li>
+<li>抽象类中的成员变量可以是各种类型的，而接口中的成员变量只能是 public static final 类型的。</li>
+<li>接口中不能含有静态代码块以及静态方法(用 static 修饰的方法)，而抽象类是可以有静态代码块和静态方法。</li>
+<li>一个类只能继承一个抽象类，而一个类却可以实现多个接口。<br>```java<br>interface IMessage{<br>public static final String Info=”接口信息”;<br>public default boolean I_connect(){<br>  System.out.println(“公共方法”);<br>  return true;<br>}<br>public abstract String getInfo();//抽象类<br>}</li>
+</ul>
+</li>
+</ul>
+<p>interface IChannel{<br>    public abstract boolean connetct();//抽象类<br>}</p>
+<p>abstract class DatabaseAbstract { //定义一个抽象类<br>        //接口中的abstract可以省略,抽象类中不允许省略<br>        public abstract boolean getDatabaseConnegtion() ;<br>}</p>
+<p>class MessageImpl extends DatabaseAbstract implements IMessage,IChannel{<br>    public String getInfo(){<br>        if (this.connetct()) {<br>            if(this.getDatabaseConnegtion()){<br>                return “数据库的到消息”;<br>            }else{<br>                return “数据库消息无法访问”;<br>            }<br>        }<br>        return “没有得到信息”;<br>    }<br>    public boolean connetct(){<br>        System.out.println(“通道建立”);<br>        return true;<br>    }<br>    public boolean getDatabaseConnegtion() {//重写抽象方法<br>        return true;<br>}</p>
+<p>public class jiekou {<br>    public static void main(String args[]) {<br>        System.out.println(IMessage.Info);//final来定义全局常量。因此能直接调用接口方法内的<br>        IMessage msg = new MessageImpl();<br>        System.out.println(msg.getInfo()+msg.I_connect());<br>        IChannel chl =(IChannel)msg;<br>//        Object obj = msg;<br>//        IChannel chl = (IChannel)obj;<br>        System.out.println(chl.connetct());<br>    }<br>}</p>
+<pre><code>
+## 泛型     
+你可以写一个泛型方法，该方法在调用时可以**接收不同类型的参数**。根据传递给泛型方法的参数类型，编译器适当地处理每一个方法调用。      
++ 下面是定义泛型方法的规则：
+    + 所有泛型方法声明都有一个类型参数声明部分（由尖括号分隔），该类型参数声明部分在方法返回类型之前（在下面例子中的`&lt;E&gt;`）。     
+    + 每一个类型参数声明部分包含一个或多个类型参数，参数间用逗号隔开。一个泛型参数，也被称为一个类型变量，是用于指定一个泛型类型名称的标识符。  
+    + 类型参数能被用来声明返回值类型，并且能作为泛型方法得到的实际参数类型的占位符。
+    + 泛型方法体的声明和其他方法一样。注意类型参数只能代表引用型类型，不能是原始类型（像int,double,char的等）。 
+
+```java
+public class GenericMethodTest
+&#123;
+   // 泛型方法 printArray                         
+   public static &lt; E &gt; void printArray( E[] inputArray )
+   &#123;
+      // 输出数组元素            
+         for ( E element : inputArray )&#123;        
+            System.out.printf( &quot;%s &quot;, element );
+         &#125;
+         System.out.println();
+    &#125;
+ 
+    public static void main( String args[] )
+    &#123;
+        // 创建不同类型数组： Integer, Double 和 Character
+        Integer[] intArray = &#123; 1, 2, 3, 4, 5 &#125;;
+        Double[] doubleArray = &#123; 1.1, 2.2, 3.3, 4.4 &#125;;
+        Character[] charArray = &#123; &#39;H&#39;, &#39;E&#39;, &#39;L&#39;, &#39;L&#39;, &#39;O&#39; &#125;;
+ 
+        System.out.println( &quot;整型数组元素为:&quot; );
+        printArray( intArray  ); // 传递一个整型数组
+ 
+        System.out.println( &quot;\n双精度型数组元素为:&quot; );
+        printArray( doubleArray ); // 传递一个双精度型数组
+ 
+        System.out.println( &quot;\n字符型数组元素为:&quot; );
+        printArray( charArray ); // 传递一个字符型数组
+    &#125; 
 &#125;
 </code></pre>
 
