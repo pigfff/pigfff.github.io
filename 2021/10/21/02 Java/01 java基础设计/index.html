@@ -713,12 +713,14 @@ class DatabaseMessage extends Message&#123;
 </li>
 </ul>
 </li>
-<li>向下转型  必须先上再向下       <pre><code>Channel test =new DatabaeChannel();
+<li>向下转型  必须先上再向下      </li>
+</ul>
+<pre><code>Channel test =new DatabaeChannel();
 test.connect();
 DatabaeChannel test2 = (DatabaeChannel) test;
 test2.connect2();
 </code></pre>
-</li>
+<ul>
 <li>对象的多态性:父子实例之间的转换处理,它有两种模式:<ul>
 <li>对象向上转型:父类父类实例-子类实例、自动完成转换;</li>
 <li>对象向下转型:子类子类实例-(子类)父类实例、强制完成转换.       </li>
@@ -792,25 +794,70 @@ public class Annotation_Override &#123;
 <li>抽象类中的方法可以有方法体，就是能实现方法的具体功能，但是接口中的方法不行。</li>
 <li>抽象类中的成员变量可以是各种类型的，而接口中的成员变量只能是 public static final 类型的。</li>
 <li>接口中不能含有静态代码块以及静态方法(用 static 修饰的方法)，而抽象类是可以有静态代码块和静态方法。</li>
-<li>一个类只能继承一个抽象类，而一个类却可以实现多个接口。<br>```java<br>interface IMessage{<br>public static final String Info=”接口信息”;<br>public default boolean I_connect(){<br>  System.out.println(“公共方法”);<br>  return true;<br>}<br>public abstract String getInfo();//抽象类<br>}</li>
+<li>一个类只能继承一个抽象类，而一个类却可以实现多个接口。        </li>
 </ul>
 </li>
 </ul>
-<p>interface IChannel{<br>    public abstract boolean connetct();//抽象类<br>}</p>
-<p>abstract class DatabaseAbstract { //定义一个抽象类<br>        //接口中的abstract可以省略,抽象类中不允许省略<br>        public abstract boolean getDatabaseConnegtion() ;<br>}</p>
-<p>class MessageImpl extends DatabaseAbstract implements IMessage,IChannel{<br>    public String getInfo(){<br>        if (this.connetct()) {<br>            if(this.getDatabaseConnegtion()){<br>                return “数据库的到消息”;<br>            }else{<br>                return “数据库消息无法访问”;<br>            }<br>        }<br>        return “没有得到信息”;<br>    }<br>    public boolean connetct(){<br>        System.out.println(“通道建立”);<br>        return true;<br>    }<br>    public boolean getDatabaseConnegtion() {//重写抽象方法<br>        return true;<br>}</p>
-<p>public class jiekou {<br>    public static void main(String args[]) {<br>        System.out.println(IMessage.Info);//final来定义全局常量。因此能直接调用接口方法内的<br>        IMessage msg = new MessageImpl();<br>        System.out.println(msg.getInfo()+msg.I_connect());<br>        IChannel chl =(IChannel)msg;<br>//        Object obj = msg;<br>//        IChannel chl = (IChannel)obj;<br>        System.out.println(chl.connetct());<br>    }<br>}</p>
-<pre><code>
-## 泛型     
-你可以写一个泛型方法，该方法在调用时可以**接收不同类型的参数**。根据传递给泛型方法的参数类型，编译器适当地处理每一个方法调用。      
-+ 下面是定义泛型方法的规则：
-    + 所有泛型方法声明都有一个类型参数声明部分（由尖括号分隔），该类型参数声明部分在方法返回类型之前（在下面例子中的`&lt;E&gt;`）。     
-    + 每一个类型参数声明部分包含一个或多个类型参数，参数间用逗号隔开。一个泛型参数，也被称为一个类型变量，是用于指定一个泛型类型名称的标识符。  
-    + 类型参数能被用来声明返回值类型，并且能作为泛型方法得到的实际参数类型的占位符。
-    + 泛型方法体的声明和其他方法一样。注意类型参数只能代表引用型类型，不能是原始类型（像int,double,char的等）。 
+<pre><code class="java">interface IMessage&#123;
+    public static final String Info=&quot;接口信息&quot;;
+    public default boolean I_connect()&#123;
+        System.out.println(&quot;公共方法&quot;);
+        return true;
+    &#125;
+    public abstract String getInfo();//抽象类
+&#125;
 
-```java
-public class GenericMethodTest
+interface IChannel&#123;
+    public abstract boolean connetct();//抽象类
+&#125;
+
+abstract class DatabaseAbstract &#123; //定义一个抽象类
+        //接口中的abstract可以省略,抽象类中不允许省略
+        public abstract boolean getDatabaseConnegtion() ;
+&#125;
+
+class MessageImpl extends DatabaseAbstract implements IMessage,IChannel&#123;
+    public String getInfo()&#123;
+        if (this.connetct()) &#123;
+            if(this.getDatabaseConnegtion())&#123;
+                return &quot;数据库的到消息&quot;;
+            &#125;else&#123;
+                return &quot;数据库消息无法访问&quot;;
+            &#125;
+        &#125;
+        return &quot;没有得到信息&quot;;
+    &#125;
+    public boolean connetct()&#123;
+        System.out.println(&quot;通道建立&quot;);
+        return true;
+    &#125;
+    public boolean getDatabaseConnegtion() &#123;//重写抽象方法
+        return true;
+&#125;
+
+public class jiekou &#123;
+    public static void main(String args[]) &#123;
+        System.out.println(IMessage.Info);//final来定义全局常量。因此能直接调用接口方法内的
+        IMessage msg = new MessageImpl();
+        System.out.println(msg.getInfo()+msg.I_connect());
+        IChannel chl =(IChannel)msg;
+//        Object obj = msg;
+//        IChannel chl = (IChannel)obj;
+        System.out.println(chl.connetct());
+    &#125;
+&#125;
+</code></pre>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>你可以写一个泛型方法，该方法在调用时可以<strong>接收不同类型的参数</strong>。根据传递给泛型方法的参数类型，编译器适当地处理每一个方法调用。      </p>
+<ul>
+<li>下面是定义泛型方法的规则：<ul>
+<li>所有泛型方法声明都有一个类型参数声明部分（由尖括号分隔），该类型参数声明部分在方法返回类型之前（在下面例子中的<code>&lt;E&gt;</code>）。     </li>
+<li>每一个类型参数声明部分包含一个或多个类型参数，参数间用逗号隔开。一个泛型参数，也被称为一个类型变量，是用于指定一个泛型类型名称的标识符。  </li>
+<li>类型参数能被用来声明返回值类型，并且能作为泛型方法得到的实际参数类型的占位符。</li>
+<li>泛型方法体的声明和其他方法一样。注意类型参数只能代表引用型类型，不能是原始类型（像int,double,char的等）。 </li>
+</ul>
+</li>
+</ul>
+<pre><code class="java">public class GenericMethodTest
 &#123;
    // 泛型方法 printArray                         
    public static &lt; E &gt; void printArray( E[] inputArray )
