@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		00 | 
+		03注解与反射 | 
 	 
 	pigfff的笔记
 	</title>
@@ -168,9 +168,18 @@ var _hmt = _hmt || [];
 							</ul>
 			
 							<ul>
+								<li class="file active">
+									<a href="/2021/10/24/02%20Java/03%E6%B3%A8%E8%A7%A3%E4%B8%8E%E5%8F%8D%E5%B0%84/">
+										03注解与反射
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
 								<li class="file">
-									<a href="/2021/10/24/02%20Java/03%20%E6%B3%A8%E8%A7%A3%E4%B8%8E%E5%8F%8D%E5%B0%84/">
-										03 注解与反射
+									<a href="/2021/10/24/02%20Java/%E7%A9%BA/">
+										空
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -187,15 +196,6 @@ var _hmt = _hmt || [];
 										99未完成
 									</a>
 									
-							<ul>
-								<li class="file active">
-									<a href="/2021/10/24/99%E6%9C%AA%E5%AE%8C%E6%88%90/00/">
-										00
-									</a>
-								</li>
-								<div class="article-toc" style="display: none;"></div>
-							</ul>
-			
 							<ul>
 								<li class="directory">
 									<a href="#" class="directory">
@@ -265,12 +265,12 @@ var _hmt = _hmt || [];
 	<!-- 引入正文 -->
 	<div id="content">
 		<h1 id="article-title">
-	00
+	03注解与反射
 </h1>
 <div class="article-meta">
 	
 	<span></span>
-	<span>2021-10-24 01:30:26</span>
+	<span>2021-10-24 01:40:50</span>
 		<div id="article-categories">
     
 		<span>Categories：</span>
@@ -286,16 +286,181 @@ var _hmt = _hmt || [];
 </div>
 
 <div id="article-content">
-	
+	<h1 id="注解与反射"><a href="#注解与反射" class="headerlink" title="注解与反射"></a>注解与反射</h1><h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><ul>
+<li>Annotation是jdk1.5开始引入的新技术。      </li>
+<li>nnotation的作用：     <ul>
+<li>不是程序本身，可以对程序作出解释；        </li>
+<li>可以被其他程序（例如编译器）读取。        </li>
+</ul>
+</li>
+<li>Annotation使用：可以附加在package、class、method、field上，相当于给它们添加了额外的辅助信息，还可以通过<strong>反射机制编程实现对这些元数据的访问</strong>。  </li>
+</ul>
+<h3 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h3><pre><code class="java">public class Test01 extends  Object&#123;
+    //@Override 重写的注解
+    @Override
+    public String toString()&#123;
+        return super.toString();
+    &#125;
+    //@Deprecated 不推荐使用
+    @Deprecated
+    public static void test()&#123;
+        System.out.println(&quot;Deprecate&quot;);
+    &#125;
+    public static void main(String args[]) &#123;
+        test();
+    &#125;
+&#125;
+</code></pre>
+<h3 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h3><pre><code class="java">import java.lang.annotation.*;
+//测试元注解
+@MyAnnotation
+public class Test02 &#123;
+    public void test() &#123;
+    &#125;
+
+&#125;
+//定义一个注解
+//Target表示我们的注解可以用在哪些地方
+@Target(value = &#123;ElementType .METHOD, ElementType. TYPE&#125;)
+//Retention 表示我们的注解在什么地方还有效.
+// runtime&gt;class&gt;sources
+@Retention(value = RetentionPolicy. RUNTIME)
+//Documented表示是否将我们的注解生成在JAVAdoc中
+@Documented
+//Inherited子类可以继承父类的注解
+@Inherited
+@interface MyAnnotation &#123;
+&#125;
+</code></pre>
+<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><ul>
+<li>Reflection（反射）是Java被视为动态语言的关键，反射机制允许程序在执行期借助于 Reflection AP取得仼何类的内部信息，并能直接操作任意对象的内部属性及方法。    <pre><code>Class c= Class.forName(“java. lang String”);
+</code></pre>
+</li>
+<li>加载完类之后，在堆內存的方法区中就产生了一个 Class类型的对象（一个类只有一个Cass对象），这个对象就包含了完整的类的结构信息。我们可以通过这个对象看到类的结构。这个对象就像一面镜子，透过这个镜子看到类的结构，所以，我们形象的称之为：反射。       </li>
+</ul>
+<blockquote>
+<p>正常方式：<br>【引用包】—&gt;【new实例化】—&gt;【获取实例话对象】<br>【实例话对象】—&gt;【getClass(方法)】—&gt;【得到完整“包类”名称】      </p>
+</blockquote>
+<p>Java反射机制提供的功能：</p>
+<ul>
+<li>在运行时判断任意一个对象所属的类；</li>
+<li>在运行时构造任意一个类的对象；</li>
+<li>在运行时判断任意一个类所具有的成员变量和方法；</li>
+<li>在运行时获取泛型信息；</li>
+<li>在运行时调用任意一个对象的成员变量和方法；</li>
+<li>在运行时处理注解；</li>
+<li>生成动态代理；</li>
+<li>…</li>
+</ul>
+<pre><code class="java">package com.reflection;
+//测试Class类的创建方法
+public class Test03 &#123;
+    public static void main(String args[])  throws ClassNotFoundException &#123;
+        //反射获取类
+        Class c1 = Class.forName(&quot;com.reflection.User&quot;);//对应&quot;包&quot;内的函数
+        System.out.println(c1);
+
+        Class c2 = Class.forName(&quot;com.reflection.User&quot;);
+        Class c3 = Class.forName(&quot;com.reflection.User&quot;);
+        //一个类被加载后，类的整个结构部会被封装在Class对象中.
+        //一个类在内存中只有一个Class对象
+        System.out.println(c1.hashCode()+&quot;\n&quot;+c2.hashCode()+&quot;\n&quot;+c3.hashCode());
+
+        /*测试class类的创建方式有哪些*/
+        Person person =new Student();
+        //方式一:通过对象获
+        Class b1=person.getClass();
+        System.out.println(b1.hashCode());
+        //方式二: forname获得
+        Class b2 = Class.forName (&quot;com.reflection.User&quot;);
+        System.out.println(b2.hashCode());
+        //方式三：通过类名.class获得
+        Class b3 = Student.class;
+        System.out.println(b3.hashCode());
+        //方法四：&quot;基本内置类型&quot;的包装类都有Type属性
+        Class b4 =Integer.TYPE;
+        System.out.println(b4);
+        //获得父类类型
+        Class b5 =b1.getSuperclass();
+        System.out.println(b5);
+        b3.getClass().forName(&quot;java.lang.Runtime&quot;);
+    &#125;
+&#125;
+class User&#123;
+    private String name;
+    private int id;
+    private int age;
+    public User()&#123;
+    &#125;
+    public User(String name,int id,int age)&#123;
+        this.name=name;
+        this.id=id;
+        this.age=age;
+    &#125;
+    public String getName() &#123;
+        return name;
+    &#125;
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+    public int getId() &#123;
+        return id;
+    &#125;
+    public void setId(int id) &#123;
+        this.id = id;
+    &#125;
+    public int getAge() &#123;
+        return age;
+    &#125;
+    public void setAge(int age) &#123;
+        this.age = age;
+    &#125;
+    @Override
+    public String toString() &#123;
+        return &quot;User&#123;&quot; +
+                &quot;id=&quot; + id +
+                &quot;, age=&quot; + age +
+                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &#39;&#125;&#39;;
+    &#125;
+&#125;
+
+class Person&#123;
+    public String name ;
+    public Person()&#123;
+    &#125;
+    public Person(String name) &#123;
+        this.name = name;
+    &#125;
+    @Override
+    public String toString() &#123;
+        return &quot;Person&#123;&quot; +
+                &quot;name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &#39;&#125;&#39;;
+    &#125;
+&#125;
+
+class Student extends Person&#123;
+    public Student()&#123;
+        this.name=&quot;学生&quot;;
+    &#125;
+&#125;
+class Teracher extends Person&#123;
+    public Teracher()&#123;
+        this.name=&quot;老师&quot;;
+    &#125;
+&#125;
+</code></pre>
+
 </div>
 
 
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2021/10/24/02%20Java/03%20%E6%B3%A8%E8%A7%A3%E4%B8%8E%E5%8F%8D%E5%B0%84/">
+              <a href="/2021/10/24/02%20Java/%E7%A9%BA/">
                   <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  03 注解与反射
+                  空
               </a>
             
         </div>
