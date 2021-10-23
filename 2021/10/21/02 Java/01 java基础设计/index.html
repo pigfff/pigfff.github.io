@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		01 java基础设计 | 
+	 
+	pigfff的笔记
+	</title>
+	
+	<!-- keywords,description -->
+	 
+
+	<!-- favicon -->
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+
+
+	<!-- search -->
+	<script>
+		var searchEngine = "https://www.google.com/search?q=";
+		if(typeof searchEngine == "undefined" || searchEngine == null || searchEngine == ""){
+			searchEngine = "https://www.google.com/search?q=";
+		}
+		var homeHost = "wujun234.github.io";
+		if(typeof homeHost == "undefined" || homeHost == null || homeHost == ""){
+			homeHost = window.location.host;
+		}
+	</script>
+
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+	
+		
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+
+		
+<script src="https://cdn.jsdelivr.net/npm/valine@v1.4.14/dist/Valine.min.js"></script>
+
+	
+	
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3efe99c287df5a1d6f0d02d187e403c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<header id="header">
+    <a id="title" href="/" class="logo">pigfff的笔记</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">ABOUT</a>
+		</li>
+	
+
+	
+
+		<li class="menu-item">
+			<a href="https://github.com/pigfff" class="menu-item-link" target="_blank">
+				UidGenerator
+			</a>
+		</li>
+		<li class="menu-item">
+			<a href="https://github.com/pigfff" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="按回车全站搜索">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										01 博客
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2021/10/19/01%20%E5%8D%9A%E5%AE%A2/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
+										博客搭建
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										02 Java
+									</a>
+									
+							<ul>
+								<li class="file active">
+									<a href="/2021/10/21/02%20Java/01%20java%E5%9F%BA%E7%A1%80%E8%AE%BE%E8%AE%A1/">
+										01 java基础设计
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										99未完成
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										数据库
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2021/10/21/99%E6%9C%AA%E5%AE%8C%E6%88%90/%E6%95%B0%E6%8D%AE%E5%BA%93/MSSQL/">
+										MSSQL
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2021/10/21/99%E6%9C%AA%E5%AE%8C%E6%88%90/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E5%9F%BA%E7%A1%80/">
+										Mysql基础
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										计算机系统
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2021/10/21/99%E6%9C%AA%E5%AE%8C%E6%88%90/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/">
+										linux
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2021/10/21/99%E6%9C%AA%E5%AE%8C%E6%88%90/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/windows/">
+										windows
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content">
+		<h1 id="article-title">
+	01 java基础设计
+</h1>
+<div class="article-meta">
+	
+	<span></span>
+	<span>2021-10-21 21:45:19</span>
+		<div id="article-categories">
+    
+		<span>Categories：</span>
+            
+    
+
+    
+		<span>Tags：</span>
+            
+    
+		</div>
+
+</div>
+
+<div id="article-content">
+	<h1 id="java基础"><a href="#java基础" class="headerlink" title="java基础"></a>java基础</h1><p>本博客仅为个人笔记录，肯定不能满足你所需要的知识内容完全获取。肯定会有错误内容，仅供参考，并建议以<a target="_blank" rel="noopener" href="https://www.oracle.com/cn/java/technologies/java-se-api-doc.html">Java SE API</a>文档作为主要学习内容。     </p>
+<p>Java的三大版本<br>JavaSE：标准版（桌面程序，控制台开发……）<br>JavaME：嵌入式开发（手机、小家电……）<br>JavaEE：E企业级开发（Web端、服务器开发……）  </p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="数据类型介绍"><a href="#数据类型介绍" class="headerlink" title="数据类型介绍"></a>数据类型介绍</h3><ul>
+<li>整型<ul>
+<li>byte占1字节，范围：-128 - 127     </li>
+<li>short占2字节，范围： -2^15 - 2^15-1   </li>
+<li>int占4字节，范围： -2^31 - 2^31 - 1    </li>
+<li>long占8字节，范围： -2^63 - 2^63-1</li>
+</ul>
+</li>
+<li>浮点类型<ul>
+<li>float占4字节 -21024 ~ -2-1074 —— 0 —— 2-1074 ~ 21024</li>
+<li>double占8字节</li>
+</ul>
+</li>
+<li>字符类型：char占2字节</li>
+<li>布尔  <ul>
+<li>boolean 只有两个值：true、false占1位。     </li>
+</ul>
+</li>
+<li>整数拓展-进制转换 <ul>
+<li>二进制前缀 0b 或 0B 例：<code>0b1</code>        </li>
+<li>八进制前缀 0  例：<code>01</code>      </li>
+<li>十六进制前缀 0x 或0X 例：<code>0x1</code>       </li>
+</ul>
+</li>
+<li>字符扩展-编码     <ul>
+<li>所有字符的本质还是数字 编码 Unicode   2字节 例：<code> \u0061</code>            </li>
+</ul>
+</li>
+</ul>
+<pre><code class="java">public class Demo1 &#123;
+    public static void main(String args[]) &#123;
+        int num1 = 10;  // 最常用
+        byte num2 = 20;
+        short num3 = 30;
+        long num4 = 40; // Long类型书写规范要在数字后面加L
+        // 小数：浮点数
+        float num5 = 50.1F; // float类型要在数字后面加F
+        double num6 = 3.1415926534546246455;
+        // 字符类型
+        char name = &#39;A&#39;;
+        // 字符串，String不是关键字，类
+        String names = &quot;subeiLY&quot;;
+        // 布尔值
+        boolean flag = true;
+        boolean flag2 = false;
+        //进制转换
+        int i=0b11;
+        int i2 = 011;   // 八进制0
+        int i3 = 0xa;  // 十六进制0x
+        //unicode编码
+        char c = &#39;\u0061&#39;;//a
+        String c3 =&quot;C:\\u0061&quot;;//&quot;c:\u0061&quot;会转译为c:a 
+    &#125;
+&#125;
+</code></pre>
+<ul>
+<li><p>常量：一旦被定义并赋值后，它的值就不能再被改变，主要利用关键字<code>final</code>来定义常量        </p>
+</li>
+<li><p>变量      </p>
+<ul>
+<li><p>成员变量 : 在类体中定义的变量是成员变量 ,作用于整个类。</p>
+</li>
+<li><p>局部变量 : 在一个函数 (或称方法) 或函数代码块中 定义的变量成为 局部变量 , 局部变量在函数或代码块被执行时创建, 在函数或代码块结束时被销毁 .<br>```java<br>public class Demo2 {<br>static final double PI = 3.14;//常量 final；常量名一般使用大写字符。<br>static int allClicks = 0;   // 类静态变量 static<br>String str = “hello world”;<br>// 实例变量:从属于对象：实例变量：从属于对象；如果不自行初始化，这个类型的默认值 0 0.0<br>// 布尔值：默认是 faLse<br>// 除了基本类型，其余的都是null<br>public static void main(String[] args) {<br>  Demo2 demo2 = new Demo2();// 变量类型 变量名字 = new Demo2();<br>  System.out.println(demo2.str);<br>  // 类变量 static<br>  System.out.println(allClicks);</p>
+<p>  System.out.println(Demo2_1.D2_1);<br>  //System.out.println(Demo2_1.D2_2);//报错<br>}<br>}<br>class Demo2_1{<br>static int D2_1=222;//<br>int D2_2=1111;<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>
+
+### 类型转换
+类型转换要注意：    
+1.  不能对布尔类型转换        
+2.  不能将对象类型转换为不相干的类型      
+3.  在把高容量转换到低容量时，强制转换                
+4.  转换的时候可能存在内存溢出，或者精度问题！
+
++ 低 --------&gt; 高 
++ byte -&gt; short -&gt; char -&gt; int -&gt; long -&gt; float -&gt; double 
+
+```java
+public class Demo3 &#123;
+    public static void main(String args[]) &#123;
+        int i=128 ;
+        //byte b= byte(i);//强制类型转换 高--&gt;低 超范围溢出会报错
+        double b1 = i;
+        // JDK7新特性，数字之间可以用下划线分割
+        int money = 10_0000_0000;
+        System.out.println();
+    &#125;
+&#125;
+</code></pre>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
+<li>数学函数与常量<ul>
+<li>Math.sqrt(x)：平方根</li>
+<li>Math.pow(x, y)：幂运算，x 的 y 次幂   </li>
+<li>Math.floorMod(x, y)：求余     </li>
+</ul>
+</li>
+<li>自增与自减运算符<ul>
+<li>建议不要在表达式中使用 ++，容易带来疑惑和 bug</li>
+<li><code>int b = 1++;    // b=2</code> &amp;&amp; <code>int b = ++1;   // b=1</code>       </li>
+</ul>
+</li>
+<li>关系和 boolean 运算符<ul>
+<li><code>==</code></li>
+<li><code>!=</code></li>
+<li><code>&lt;</code></li>
+<li><code>&gt;</code></li>
+<li><code>&lt;=</code></li>
+<li><code>&gt;=</code></li>
+<li><code>&amp;&amp;</code>（逻辑与：两个变量都为真，结果才为true）</li>
+<li><code>||</code>（逻辑或：两个变量有一个为真，则结果才为true）</li>
+<li><code>?:</code>        </li>
+</ul>
+</li>
+<li>位运算符<br>简单理解，将值转为二进制进行同位取值比较<ul>
+<li>整型<ul>
+<li>| (或)</li>
+<li>&amp; (且)</li>
+<li>~ (非)</li>
+<li>^ (抑或)</li>
+<li>布尔值</li>
+<li>可用 &amp; 和 |，只是不短路</li>
+</ul>
+</li>
+<li>位移<ul>
+<li><code>&lt;&lt;</code>（左移）例：<code>3&lt;&lt;1</code>;3的二进制11 往左移动边为 110即6</li>
+<li><code>&gt;&gt;</code>（带符号右移）<code>3&gt;&gt;1</code>;3的二进制11 往右移动边为 1.1即1</li>
+<li>“符号扩展”：若值为正，则在高位插入 0；若值为负，则在高位插入 1。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>三元运算:<code> x ？ y : z</code>如果x==true,则结果为y，否则结果为z</li>
+</ul>
+<h2 id="控制流程"><a href="#控制流程" class="headerlink" title="控制流程"></a>控制流程</h2><ul>
+<li><p>条件语句</p>
+<pre><code>if (判断) &#123; &#125;else if(判断)&#123;执行&#125;else &#123;执行&#125;
+</code></pre>
+</li>
+<li><p>循环<br>警告：循环中检测两个浮点数是否相等时要格外小心，由于舍入可能得不到精确值。</p>
+<pre><code>do&#123; &#125;while();//先执行再
+while ()&#123; &#125;;//先判断再执行
+for(初始化;布尔表达式;更新)&#123;
+  // 代码语句
+&#125;
+</code></pre>
+<p>警告：循环中检测两个浮点数是否相等时要格外小心，由于舍入可能得不到精确值。</p>
+</li>
+<li><p>多重选择：switch 语句</p>
+<pre><code>//当条件满足则会进行输出，用break进行阻断如果没有相匹配的 case 标签，而有 default 语句，就执行这个子句
+switch (2)&#123; 
+case 1:&#123;&#125;;
+case 2:&#123;&#125;;
+case 3:&#123;&#125;;
+default:&#123;&#125;
+</code></pre>
+</li>
+<li><p>中断控制流程语句</p>
+<ul>
+<li>break:在任何循环语句的主体部分，均可用 break控制循环的流程。 ==break用于强行退出循环==，不执行循环中剩余的语句。（ break语句也在 switch语句中使用。</li>
+<li>continue:语句用在循环语句体中，==用于终止某次循环过程==，即跳过循环体中尚未执行的语句，接着进行下一次是否执行循环的判定。</li>
+</ul>
+</li>
+</ul>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>一旦创建了数组就不能改变它的大小        </p>
+<pre><code>int[] a = new int[n];
+int a[] = new int[n];
+</code></pre>
+<ul>
+<li>多维数组<br>java 实际上没一维有多维数组，只有数组，多维数组被解释成“数组的数组”     <pre><code>int a[][] = &#123;&#123;1,2,3&#125;,&#123;1,2,3&#125;,&#123;1,2,3,4,5,6,7,8,9&#125; &#125;;
+a[2][8]=9 #第三个数组的的第9位
+</code></pre>
+<h2 id="输入与输出"><a href="#输入与输出" class="headerlink" title="输入与输出"></a>输入与输出</h2><h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3></li>
+</ul>
+<p>标准输入：<code>Scanner in = new Scanner(System.in);</code><br>方法：</p>
+<ul>
+<li>nextLine():下一行</li>
+<li>next()：下一个单词（以空格分割）</li>
+<li>nextInt()：整型</li>
+<li>nextDouble()</li>
+</ul>
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><ul>
+<li>printf 方法</li>
+<li>文件输出<code>PrintWriter</code></li>
+</ul>
+<pre><code class="java">public class Demo7 throws FileNotFoundException, UnsupportedEncodingException &#123;
+    public static void main(String args[]) &#123;
+        Scanner s = new Scanner(System.in);
+        if (s.hasNext())&#123;
+            String str=s.next();
+            System.out.println(&quot;输入内容&quot;+str);
+        &#125;
+        s.close();// 凡是属于IO流的类如果不关闭会一直占用资源
+
+        //文件输出
+        PrintWriter PW = new PrintWriter(&quot;TEST.txt&quot;,&quot;UTF-8&quot;);
+        PW.println(&quot;中文Test123&quot;);
+        PW.close();
+    &#125;
+&#125;
+</code></pre>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2021/10/21/99%E6%9C%AA%E5%AE%8C%E6%88%90/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/windows/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  windows
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2021/10/19/01%20%E5%8D%9A%E5%AE%A2/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
+                
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+
+<script>
+	
+	
+</script>
+	</div>
+	<div id="footer">
+	<p>
+	©2019-<span id="footerYear"></span> 
+	<a href="/"></a> 
+	
+	
+		|
+		<span id="busuanzi_container_site_pv">
+			pv
+			<span id="busuanzi_value_site_pv"></span>
+		</span>
+		|
+		<span id="busuanzi_container_site_uv"> 
+			uv
+			<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+	<br>
+	Theme <a href="//github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a>
+	by <a href="//github.com/wujun234" target="_blank">WuJun</a>
+	Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+	</p>
+</div>
+<script type="text/javascript"> 
+	document.getElementById('footerYear').innerHTML = new Date().getFullYear() + '';
+</script>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+</body>
+</html>

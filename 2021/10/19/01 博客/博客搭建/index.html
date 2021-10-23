@@ -126,16 +126,105 @@ var _hmt = _hmt || [];
 								<li class="directory">
 									<a href="#" class="directory">
 										<i class="fa fa-plus-square-o"></i>
-										博客
+										01 博客
 									</a>
 									
 							<ul>
 								<li class="file active">
-									<a href="/2021/10/19/%E5%8D%9A%E5%AE%A2/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
+									<a href="/2021/10/19/01%20%E5%8D%9A%E5%AE%A2/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
 										博客搭建
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										02 Java
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2021/10/21/02%20Java/01%20java%E5%9F%BA%E7%A1%80%E8%AE%BE%E8%AE%A1/">
+										01 java基础设计
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										99未完成
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										数据库
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2021/10/21/99%E6%9C%AA%E5%AE%8C%E6%88%90/%E6%95%B0%E6%8D%AE%E5%BA%93/MSSQL/">
+										MSSQL
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2021/10/21/99%E6%9C%AA%E5%AE%8C%E6%88%90/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E5%9F%BA%E7%A1%80/">
+										Mysql基础
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										计算机系统
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2021/10/21/99%E6%9C%AA%E5%AE%8C%E6%88%90/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/">
+										linux
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2021/10/21/99%E6%9C%AA%E5%AE%8C%E6%88%90/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/windows/">
+										windows
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
 							</ul>
 			
 								</li>
@@ -170,7 +259,7 @@ var _hmt = _hmt || [];
 </div>
 
 <div id="article-content">
-	<h1 id="博客搭建—基于hexo和github"><a href="#博客搭建—基于hexo和github" class="headerlink" title="博客搭建—基于hexo和github"></a>博客搭建—基于hexo和github</h1><h2 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h2><p>基于mac_m1环境下进行的安装<br>直接去Node.js官方网站进行下载<br>判断安装是否成功</p>
+	<h1 id="博客搭建—基于hexo和github"><a href="#博客搭建—基于hexo和github" class="headerlink" title="博客搭建—基于hexo和github"></a>博客搭建—基于hexo和github</h1><h2 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h2><p>本次安装是在mac环境下进行安装的<br>需要node.jd,官方网站可以直接进行下载<br>判断安装是否成功</p>
 <pre><code>node -v
 npm -v
 </code></pre>
@@ -228,6 +317,18 @@ git config --global user.email &quot;用户邮箱&quot;
 <blockquote>
 <p><strong>deploy：repo 选择了ssh连接方式<br>brach main分支<br>说明：选择 ssh 配置公私密钥不用输入密码比较方便<br>要记得将项目main分支设置为默认</strong>    </p>
 </blockquote>
+<h2 id="HEXO皮肤"><a href="#HEXO皮肤" class="headerlink" title="HEXO皮肤"></a>HEXO皮肤</h2><p>HEXO皮肤可以去<code>https://hexo.io/themes/</code>进行挑选<br>此博客皮肤来源<code>https://github.com/wujun234/hexo-theme-tree</code><br>安装过程注意导航栏和图标内<code>themes/tree/layout/_partial</code>要修改为自己博客路径   </p>
+<p>安装插件Markdown-it </p>
+<pre><code>#在bolg文件夹中
+npm install markdown-it --save
+
+#修改blog文件夹_config.yml 
+highlight:
+  enable: false
+  line_number: false
+  auto_detect: false
+  tab_replace: &#39;&#39;
+</code></pre>
 <h2 id="一些补充"><a href="#一些补充" class="headerlink" title="一些补充"></a>一些补充</h2><p>socks代理</p>
 <pre><code>git config --global http.proxy &#39;socks5://127.0.0.1:1080&#39;
 git config --global https.proxy &#39;socks5://127.0.0.1:1080&#39;
@@ -247,6 +348,11 @@ proxy = socks5://127.0.0.1:1080
 
     <div class="post-guide">
         <div class="item left">
+            
+              <a href="/2021/10/21/02%20Java/01%20java%E5%9F%BA%E7%A1%80%E8%AE%BE%E8%AE%A1/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  01 java基础设计
+              </a>
             
         </div>
         <div class="item right">
