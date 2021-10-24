@@ -417,11 +417,7 @@ class User&#123;
     &#125;
     @Override
     public String toString() &#123;
-        return &quot;User&#123;&quot; +
-                &quot;id=&quot; + id +
-                &quot;, age=&quot; + age +
-                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
-                &#39;&#125;&#39;;
+        return &quot;User&#123;&quot; + &quot;id=&quot; + id + &quot;, age=&quot; + age + &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; + &#39;&#125;&#39;;
     &#125;
 &#125;
 
@@ -434,12 +430,9 @@ class Person&#123;
     &#125;
     @Override
     public String toString() &#123;
-        return &quot;Person&#123;&quot; +
-                &quot;name=&#39;&quot; + name + &#39;\&#39;&#39; +
-                &#39;&#125;&#39;;
+        return &quot;Person&#123;&quot; +&quot;name=&#39;&quot; + name + &#39;\&#39;&#39; +&#39;&#125;&#39;;
     &#125;
 &#125;
-
 class Student extends Person&#123;
     public Student()&#123;
         this.name=&quot;学生&quot;;
@@ -451,6 +444,417 @@ class Teracher extends Person&#123;
     &#125;
 &#125;
 </code></pre>
+<h2 id="Class实例化"><a href="#Class实例化" class="headerlink" title="Class实例化"></a>Class实例化</h2><ul>
+<li><p>在 Object类中定义了以下的方法，此方法将被所有子类继承     </p>
+<ul>
+<li>public final Class getclass()     </li>
+</ul>
+</li>
+<li><p>对象照镜子后可以得到的信息：某个类的属性、方法和构造器、某个类到底实现了哪些接口对于每个类而言，JRE都为其保留一个不变的Cass类型的对象。一个Class对象包含了特定某个结构（ class/interface/enum/annotation/ primitive type/void/[]）的有关信息。        </p>
+<ul>
+<li>Class本身也是一个类；</li>
+<li>Class对象只能由系统建立对象；</li>
+<li>一个加载的类在JVM中只会有一个Class实例；</li>
+<li>一个Cass对象对应的是一个加载到JM中的一个class文件；</li>
+<li>每个类的实例都会记得自己是由哪个Class实例所生成；</li>
+<li>通过class可以完整地得到一个类中的所有被加载的结构；</li>
+<li>class类是 Reflection的根源，针对任何你想动态加载、运行的类，唯有先获得相应的Class对象。       </li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static ClassforName (String name)</td>
+<td>返回指定类名name的class对象</td>
+</tr>
+<tr>
+<td>Object newInstance ()</td>
+<td>调用缺省构造函数，返回 Class对象的一个实例</td>
+</tr>
+<tr>
+<td>getName ()</td>
+<td>返回此Class对象所表示的实体（类，接口，数组类或void）的名称。</td>
+</tr>
+<tr>
+<td>Class getSuperClass ()</td>
+<td>返回当前class对象的父类的class对象</td>
+</tr>
+<tr>
+<td>Class[] getinterfaces ()</td>
+<td>获取当前 Class对象的接口</td>
+</tr>
+<tr>
+<td>ClassLoader getclassLoader ()</td>
+<td>返回该类的类加载器</td>
+</tr>
+<tr>
+<td>Constructor getConstructors ()</td>
+<td>返回一个包含某些 Constructor对象的数组</td>
+</tr>
+<tr>
+<td>Method getMothed (String name, Class…T)</td>
+<td>返回一个 Method对象，此对象的形参类型为paramType</td>
+</tr>
+<tr>
+<td>Field[] getDeclaredFields ()</td>
+<td>返回Field对象的一个数组</td>
+</tr>
+</tbody></table>
+<h2 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a>类加载</h2><ul>
+<li>加载：将 class文件字节码內容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构，然后生成一个代表这个类的 java. lang . Class对象。</li>
+<li>链接：将Java类的二进制代码合并到JVM的运行状态之中的过程。<ul>
+<li>验证：确保加载的类信息符合JVM规范，没有安全方面的问题。</li>
+<li>准备：正式为类变量（ static）分配内存并设置类变量默认初始值的阶段，这些内存都将在方法区中进行分配。</li>
+<li>解析：虚拟机常量池内的符号引用（常量名）替换为直接引用（地址）的过程。</li>
+</ul>
+</li>
+<li>初始化：<ul>
+<li>执行类构造器&lt; clinit&gt;貟方法的过程。类构造器&lt; clinit&gt;O方法是由编译期自动收集类中所有类变量的赋值动作和静态代码块中的语句合并产生的。（类构造器是构造类信息的，不是构造该类对象的构造器）。</li>
+<li>当初始化一个类的时候，如果发现其父类还没有进行初始化，则需要先触发其父类的初始化。</li>
+<li>虛拟机会保证一个类的&lt; clinit &gt;()方法在多线程环境中被正确加锁和同步。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="java">package com.reflection;
+
+public class Test05 &#123;
+    public static void main(String[] args) &#123;
+        A a = new A();
+        System.out.println(A.m);
+        /*
+        1. 加载到内存,会产生一个类对应Class对象
+        2. 链接,连接结束后m=0
+        3. 初始化
+           &lt;clinit&gt;()&#123;
+                System.out.println(&quot;A类静态代码块初始化&quot;);
+                m = 300;
+                m = 100;
+         &#125;
+         */
+    &#125;
+&#125;
+class A&#123;
+    static&#123;
+        System.out.println(&quot;A类静态代码块初始化&quot;);
+        m=300;
+    &#125;
+    static int m=100;
+    public A()&#123;
+        System.out.println(&quot;A类无参构造初始化&quot;);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="初始化问题"><a href="#初始化问题" class="headerlink" title="初始化问题"></a>初始化问题</h3><ul>
+<li>类的主动引用（一定会发生类的初始化）<ul>
+<li>当虚拟机启动，先初始化main方法所在的类；</li>
+<li>new一个类的对象；</li>
+<li>调用类的静态成员（除了fina常量）和静态方法；</li>
+<li>使用 java. lang. reflect包的方法对类进行反射调用；</li>
+<li>当初始化一个类，如果其父类没有被初始化，则先会初始化它的父类。</li>
+</ul>
+</li>
+<li>类的被动引用（不会发生类的初始化）<ul>
+<li>当访问一个静态域时，只有真正声明这个域的类才会被初始化。如：当通过子类引用父类的静态变量，不会导致子类初始化；</li>
+<li>通过数组定义类引用，不会触发此类的初始化；</li>
+<li>引用常量不会触发此类的初始化（常量在链接阶段就存入调用类的常量池中了）。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="java">package com.reflection;
+public class Test06 &#123;
+    static &#123;
+        System.out.println(&quot;main类被加载&quot;);
+    &#125;
+    public static void main(String args[]) throws ClassNotFoundException&#123;
+//        1.主动引用
+        Son son=new Son();
+//        Class.forName(&quot;Demo2.Son&quot;);
+//
+//        不会产生引用类的引用的方法
+//        System.out.println(Son.b);;
+//        Son[] array=new Son[5];
+//        System.out.println(Son.M);
+    &#125;
+&#125;
+class Father&#123;
+    public Father()&#123;
+        System.out.println(&quot;父类构造函数public Father()&quot;);
+    &#125;
+    static int b=2;
+    &#123;
+        System.out.printf(&quot;父亲类&#123;&#125;被加载 %s\n&quot;, this.getClass());
+    &#125;
+    static &#123;
+        System.out.println(&quot;父类static&#123;&#125;被加载&quot;);
+    &#125;
+&#125;
+class Son extends Father&#123;
+    static&#123;
+        System.out.println(&quot;子类static&#123;&#125;被加载&quot;);
+        m=300;
+    &#125;
+    static int m=100;
+    static final int M=1;
+&#125;
+</code></pre>
+<h3 id="类加载器的作用"><a href="#类加载器的作用" class="headerlink" title="类加载器的作用"></a>类加载器的作用</h3><blockquote>
+<p>类加载器的作用:</p>
+<ul>
+<li>类加载的作用：将 class文件字节码内容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构，然后在堆中生成一个代表这个类的 java. lang Class对象，作为方法区中类数据的访问入口。     </li>
+<li>类缓存：标准的 JavaSe类加载器可以按要求查找类，但一旦某个类被加载到类加载器中，它将维持加载（缓存）一段时间。不过丿M垃圾回收机制可以回收这些 Classi对象</li>
+</ul>
+</blockquote>
+<pre><code class="java">package com.reflection;
+
+public class Test07 &#123;
+    public static void main(String args[]) throws ClassNotFoundException &#123;
+
+        //获取系统类加载器
+        ClassLoader systemClassloader=ClassLoader.getSystemClassLoader();
+        System.out.println(systemClassloader);
+
+        //获取系统类加载器的夫类加载器--&gt;扩展类加载器
+        ClassLoader parent =systemClassloader.getParent();
+        System.out.println(parent);
+
+        //获取扩展类加载器的父类加载器--&gt;跟加载器（C/c++）
+        ClassLoader parentl =parent.getParent();
+        System.out.println(parentl);
+
+        //测试当前类是那个加载器加载
+        ClassLoader classLoader=Class.forName(&quot;com.reflection.Test07&quot;).getClassLoader();
+        System.out.println(classLoader);
+
+        //测试JDK内置类是那个加载器加载
+        classLoader=Class.forName(&quot;java.lang.Object&quot;).getClassLoader();
+        System.out.println(classLoader);
+
+        //如何获取系统类加载器可以加载哪些路径
+        System.out.println(System.getProperty(&quot;java.class.path&quot;));
+
+        //双亲委派机制。
+    &#125;
+&#125;
+</code></pre>
+<h2 id="通过反射获取运行类完整结构"><a href="#通过反射获取运行类完整结构" class="headerlink" title="通过反射获取运行类完整结构"></a>通过反射获取运行类完整结构</h2><ul>
+<li>通过反射获取运行时类的完整结构</li>
+<li>Field、 Method、 Constructor.、 Superclass、 Interface、 Annotation</li>
+<li>实现的全部接口</li>
+<li>所继承的父类</li>
+<li>全部的构造器</li>
+<li>全部的方法</li>
+<li>全部的Feld</li>
+<li>注解                </li>
+</ul>
+<pre><code class="java">package com.reflection;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+public class Test08 &#123;
+    public static void main(String args[]) throws ClassNotFoundException, NoSuchFieldException, NoSuchMethodException &#123;
+        Class c1 =Class.forName(&quot;com.reflection.User&quot;);
+
+        //获取类的名字
+        System.out.println(c1.getName());//获取包名字
+        System.out.println(c1.getSimpleName());//获取类名
+
+        //获取类的属性
+        System.out.println(&quot;=================&quot;);
+        Field[] fields=c1.getFields();//职能找到public属性
+
+        fields =c1.getDeclaredFields();//获取全部属性
+        for (Field field:fields)&#123;
+            System.out.println(field);
+        &#125;
+
+        //获取指定属性值
+        Field name =c1.getDeclaredField(&quot;name&quot;);
+        System.out.println(name);
+
+        //获取类的方法
+        System.out.println(&quot;=================&quot;);
+        Method[] methods =c1.getMethods();//获取本类及其父类的全部public
+        for (Method method:methods)&#123;
+            System.out.println(&quot;正常的：&quot;+method);
+        &#125;
+        methods=c1.getDeclaredMethods();//获取本类的所有方法
+        for(Method method:methods)&#123;
+            System.out.println(&quot;getDeclareMethos:&quot;+method);
+        &#125;
+
+        //获取指定方法
+        Method getName = c1.getMethod(&quot;getName&quot;, null);
+        Method setName = c1.getMethod(&quot;setName&quot;, String.class);
+        System.out.println(getName);
+        System.out.println(setName);
+
+        //获取指定的构造器
+        System.out.println(&quot;============&quot;);
+        Constructor[] constructors=c1.getConstructors();
+        for(Constructor constructor:constructors)&#123;
+            System.out.println(constructor);
+
+        &#125;
+        constructors=c1.getDeclaredConstructors();
+        for (Constructor constructor:constructors)&#123;
+            System.out.println(&quot;#&quot;+constructor);
+        &#125;
+
+        //获取指定的构造
+        Constructor declareConstructor = c1.getConstructor(String.class,int.class,int.class);
+        System.out.println(&quot;指定&quot;+declareConstructor);
+
+    &#125;
+
+&#125;
+
+</code></pre>
+<h2 id="调用运行时类的指定结构"><a href="#调用运行时类的指定结构" class="headerlink" title="调用运行时类的指定结构"></a>调用运行时类的指定结构</h2><ul>
+<li>创建类的对象：调用 Class对象的 newInstance()方法<ul>
+<li>类必须有一个无参数的构造器。</li>
+<li>类的构造器的访问权限需要足够。</li>
+</ul>
+</li>
+<li>只要在操作的时候明确的调用类中的构造器，并将参数传递进去之后，才可以实例化操作。<ul>
+<li>通过class类的 getDeclaredConstructor（ Class…， parameterTypes）取得本类的指定形参类型的构造器；</li>
+<li>向构造器的形参中传递一个对象数组进去，里面包含了构造器中所需的各个参数。</li>
+<li>通过 Constructo实例化对象     </li>
+</ul>
+</li>
+</ul>
+<pre><code class="java">package com.reflection;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+public class Test09 &#123;
+        public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException &#123;
+        // 获得Class对象
+        Class c1 = Class.forName(&quot;com.reflection.User&quot;);
+        // 构造一个对象
+        User user = (User) c1.newInstance();    // 本质上调用了类的无参构造器
+        System.out.println(user);
+        // 通过构造器创建对象
+        Constructor constructor = c1.getDeclaredConstructor(String.class, int.class, int.class);
+        User user1 = (User) constructor.newInstance(&quot;Hello?&quot;,001,17);
+        System.out.println(user1);
+        // 通过反射调用普通方法
+        User user2 = (User) c1.newInstance();
+        // 通过反射获取一个方法
+        Method setName = c1.getDeclaredMethod(&quot;setName&quot;, String.class);
+        // invoke:激活
+        // (对象,&quot;方法值&quot;)
+        setName.invoke(user2, &quot;some&quot;);
+        System.out.println(user2.getName());
+        // 通过反射操作属性
+        User user3 = (User) c1.newInstance();
+        Field name = c1.getDeclaredField(&quot;name&quot;);
+        // 不能直接操作私有属性,我们需要关闭程序的安全检测,属性或方法的setAccessible(true)
+        // 设置安全检测
+        name.setAccessible(true);
+        name.set(user3, &quot;some2&quot;);
+        System.out.println(user3.getName());
+    &#125;
+&#125;
+</code></pre>
+<ul>
+<li>通过反射，调用类中的方法，通过 Method类完成。<ul>
+<li>通过Cas类的 getMethod（ String name, Class… parameterTypes）方法取得一个 Method对象，并设置此方法操作时所需要的参数类型。</li>
+<li>之后使用 Object invoke（ Object obj，Object[] args）进行调用，并向方法中传递要设置的ob对象的参数信息。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Class.forName()—①实例化Class–&gt;Person<br>getMethod(sayHelllo”)—②找到sayHello()方法–&gt;sayHello()<br>invoke()–③调用方法-&gt;sayHello()</p>
+</blockquote>
+<h2 id="反射操作泛型"><a href="#反射操作泛型" class="headerlink" title="反射操作泛型"></a>反射操作泛型</h2><ul>
+<li>Java采用泛型擦除的机制来引入泛型，Java中的泛型仅仅是给编译器javac使用的，确保数据的安全性和免去强制类型转换问题，但是，一旦编译完成，所有和泛型有关的类型全部擦除。</li>
+<li>为了通过反射操作这些类型，Java新增了 ParameterizedType, GenericArray Type, Type Variable和 WildcardType几种类型来代表不能被归一到clas类中的类型但是又和原始类型齐名的类型。</li>
+<li>ParameterizedType：表示一种参数化类型，比如 Collection&lt; String&gt;</li>
+<li>GenericArray Type：表示一种元素类型是参数化类型或者类型变量的数组类型；</li>
+<li>Type Variable：是各种类型变量的公共父接口；</li>
+<li>WildcardType：代表一种通配符类型表达式。      </li>
+</ul>
+<pre><code class="java">package com.reflection;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Map;
+public class Test11 &#123;
+    /**
+     * 通过反射获取泛型
+     * @author subeiLY
+     * @create 2021-06-07 16:03
+     */
+    public void test02(Map&lt;String,User&gt; map, List&lt;User&gt; list)&#123;
+        System.out.println(&quot;test02&quot;);
+    &#125;
+    public Map&lt;String,User&gt; test03()&#123;
+        System.out.println(&quot;Test03&quot;);
+        return null;
+    &#125;
+    public static void main(String[] args) throws NoSuchMethodException &#123;
+        Method method = Test11.class.getMethod(&quot;test02&quot;, Map.class, List.class);
+        Type[] genericParameterTypes = method.getGenericParameterTypes();
+        for (Type genericParameterType : genericParameterTypes)&#123;
+            System.out.println(&quot;#&quot; + genericParameterType);
+            if(genericParameterType instanceof ParameterizedType)&#123;
+                Type[] typeArguments = ((ParameterizedType) genericParameterType).getActualTypeArguments();
+                for (Type typeArgument : typeArguments)&#123;
+                    System.out.println(typeArgument);
+                &#125;
+            &#125;
+        &#125;
+        method = Test11.class.getMethod(&quot;test03&quot;, null);
+        Type returnType = method.getGenericReturnType();
+        if(returnType instanceof ParameterizedType)&#123;
+            Type[] typeArguments = ((ParameterizedType) returnType).getActualTypeArguments();
+            for (Type typeArgument : typeArguments)&#123;
+                System.out.println(typeArgument);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="反射操作注解"><a href="#反射操作注解" class="headerlink" title="反射操作注解"></a>反射操作注解</h2><ul>
+<li>Object relationship Mapping - &gt; 对象关系映射<br>```java<br>package com.reflection;<br>import java.lang.annotation.*;<br>import java.lang.reflect.Field;</li>
+</ul>
+<p>public class Test12 {</p>
+<pre><code>/**
+ * 练习反射操作注解
+ * @author subeiLY
+ * @create 2021-06-07 16:21
+ */
+public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException &#123;
+    Class c1 = Class.forName(&quot;com.reflection.Student2&quot;);
+    //通过反射获取注解
+    Annotation[] annotations = c1.getAnnotations();
+    for (Annotation annotation : annotations) &#123;
+        System.out.println(annotation);
+    &#125;
+    //获得注解value
+    TableDoris tableDoris = (TableDoris) c1.getAnnotation(TableDoris.class);
+    String value = tableDoris.value();
+    System.out.println(value);
+    //获得类指定的注解
+    Field name = c1.getDeclaredField(&quot;name&quot;);
+    FiledDoris annotation = name.getAnnotation(FiledDoris.class);
+    System.out.println(annotation.columnName());
+    System.out.println(annotation.type());
+    System.out.println(annotation.length());
+&#125;
+</code></pre>
+<p>}<br>@TableDoris(“db_student”)<br>class Student2 {<br>    @FiledDoris(columnName = “db_id”, type = “int”, length = 10)<br>    private int id;<br>    @FiledDoris(columnName = “db_age”, type = “int”, length = 3)<br>    private int age;<br>    @FiledDoris(columnName = “db_name”, type = “varchar”, length = 200)<br>    private String name;<br>    public Student2() {<br>    }<br>    public Student2(int id, int age, String name) {<br>        this.id = id;<br>        this.age = age;<br>        this.name = name;<br>    }<br>    @Override<br>    public String toString() {<br>        return “Student2{“ +<br>                “id=” + id +<br>                “, age=” + age +<br>                “, name=’” + name + ‘&#39;‘ +<br>                ‘}’;<br>    }<br>    public int getId() {<br>        return id;<br>    }<br>    public void setId(int id) {<br>        this.id = id;<br>    }<br>    public int getAge() {<br>        return age;<br>    }<br>    public void setAge(int age) {<br>        this.age = age;<br>    }<br>    public String getName() {<br>        return name;<br>    }<br>    public void setName(String name) {<br>        this.name = name;<br>    }<br>}<br>// 类名注解<br>@Target(ElementType.TYPE)<br>@Retention(RetentionPolicy.RUNTIME)<br>@interface TableDoris {<br>    String value();<br>}<br>// 属性注解<br>@Target(ElementType.FIELD)<br>@Retention(RetentionPolicy.RUNTIME)<br>@interface FiledDoris {<br>    String columnName();<br>    String type();<br>    int length();<br>}</p>
+<p>``` </p>
 
 </div>
 
