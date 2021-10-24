@@ -826,35 +826,95 @@ public class Test11 &#123;
 &#125;
 </code></pre>
 <h2 id="反射操作注解"><a href="#反射操作注解" class="headerlink" title="反射操作注解"></a>反射操作注解</h2><ul>
-<li>Object relationship Mapping - &gt; 对象关系映射<br>```java<br>package com.reflection;<br>import java.lang.annotation.*;<br>import java.lang.reflect.Field;</li>
+<li>Object relationship Mapping - &gt; 对象关系映射      </li>
 </ul>
-<p>public class Test12 {</p>
-<pre><code>/**
- * 练习反射操作注解
- * @author subeiLY
- * @create 2021-06-07 16:21
- */
-public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException &#123;
-    Class c1 = Class.forName(&quot;com.reflection.Student2&quot;);
-    //通过反射获取注解
-    Annotation[] annotations = c1.getAnnotations();
-    for (Annotation annotation : annotations) &#123;
-        System.out.println(annotation);
+<pre><code class="java">package com.reflection;
+import java.lang.annotation.*;
+import java.lang.reflect.Field;
+
+public class Test12 &#123;
+
+    /**
+     * 练习反射操作注解
+     * @author subeiLY
+     * @create 2021-06-07 16:21
+     */
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException &#123;
+        Class c1 = Class.forName(&quot;com.reflection.Student2&quot;);
+        //通过反射获取注解
+        Annotation[] annotations = c1.getAnnotations();
+        for (Annotation annotation : annotations) &#123;
+            System.out.println(annotation);
+        &#125;
+        //获得注解value
+        TableDoris tableDoris = (TableDoris) c1.getAnnotation(TableDoris.class);
+        String value = tableDoris.value();
+        System.out.println(value);
+        //获得类指定的注解
+        Field name = c1.getDeclaredField(&quot;name&quot;);
+        FiledDoris annotation = name.getAnnotation(FiledDoris.class);
+        System.out.println(annotation.columnName());
+        System.out.println(annotation.type());
+        System.out.println(annotation.length());
     &#125;
-    //获得注解value
-    TableDoris tableDoris = (TableDoris) c1.getAnnotation(TableDoris.class);
-    String value = tableDoris.value();
-    System.out.println(value);
-    //获得类指定的注解
-    Field name = c1.getDeclaredField(&quot;name&quot;);
-    FiledDoris annotation = name.getAnnotation(FiledDoris.class);
-    System.out.println(annotation.columnName());
-    System.out.println(annotation.type());
-    System.out.println(annotation.length());
+&#125;
+@TableDoris(&quot;db_student&quot;)
+class Student2 &#123;
+    @FiledDoris(columnName = &quot;db_id&quot;, type = &quot;int&quot;, length = 10)
+    private int id;
+    @FiledDoris(columnName = &quot;db_age&quot;, type = &quot;int&quot;, length = 3)
+    private int age;
+    @FiledDoris(columnName = &quot;db_name&quot;, type = &quot;varchar&quot;, length = 200)
+    private String name;
+    public Student2() &#123;
+    &#125;
+    public Student2(int id, int age, String name) &#123;
+        this.id = id;
+        this.age = age;
+        this.name = name;
+    &#125;
+    @Override
+    public String toString() &#123;
+        return &quot;Student2&#123;&quot; +
+                &quot;id=&quot; + id +
+                &quot;, age=&quot; + age +
+                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &#39;&#125;&#39;;
+    &#125;
+    public int getId() &#123;
+        return id;
+    &#125;
+    public void setId(int id) &#123;
+        this.id = id;
+    &#125;
+    public int getAge() &#123;
+        return age;
+    &#125;
+    public void setAge(int age) &#123;
+        this.age = age;
+    &#125;
+    public String getName() &#123;
+        return name;
+    &#125;
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+&#125;
+// 类名注解
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@interface TableDoris &#123;
+    String value();
+&#125;
+// 属性注解
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+@interface FiledDoris &#123;
+    String columnName();
+    String type();
+    int length();
 &#125;
 </code></pre>
-<p>}<br>@TableDoris(“db_student”)<br>class Student2 {<br>    @FiledDoris(columnName = “db_id”, type = “int”, length = 10)<br>    private int id;<br>    @FiledDoris(columnName = “db_age”, type = “int”, length = 3)<br>    private int age;<br>    @FiledDoris(columnName = “db_name”, type = “varchar”, length = 200)<br>    private String name;<br>    public Student2() {<br>    }<br>    public Student2(int id, int age, String name) {<br>        this.id = id;<br>        this.age = age;<br>        this.name = name;<br>    }<br>    @Override<br>    public String toString() {<br>        return “Student2{“ +<br>                “id=” + id +<br>                “, age=” + age +<br>                “, name=’” + name + ‘&#39;‘ +<br>                ‘}’;<br>    }<br>    public int getId() {<br>        return id;<br>    }<br>    public void setId(int id) {<br>        this.id = id;<br>    }<br>    public int getAge() {<br>        return age;<br>    }<br>    public void setAge(int age) {<br>        this.age = age;<br>    }<br>    public String getName() {<br>        return name;<br>    }<br>    public void setName(String name) {<br>        this.name = name;<br>    }<br>}<br>// 类名注解<br>@Target(ElementType.TYPE)<br>@Retention(RetentionPolicy.RUNTIME)<br>@interface TableDoris {<br>    String value();<br>}<br>// 属性注解<br>@Target(ElementType.FIELD)<br>@Retention(RetentionPolicy.RUNTIME)<br>@interface FiledDoris {<br>    String columnName();<br>    String type();<br>    int length();<br>}</p>
-<p>``` </p>
 
 </div>
 
