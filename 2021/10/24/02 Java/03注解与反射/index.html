@@ -189,15 +189,6 @@ var _hmt = _hmt || [];
 			
 							<ul>
 								<li class="file">
-									<a href="/2021/10/24/02%20Java/04%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
-										04序列化与反序列化
-									</a>
-								</li>
-								<div class="article-toc" style="display: none;"></div>
-							</ul>
-			
-							<ul>
-								<li class="file">
 									<a href="/2021/10/25/02%20Java/%E7%A9%BA/">
 										空
 									</a>
@@ -934,6 +925,53 @@ class Student2 &#123;
     int length();
 &#125;
 </code></pre>
+<h1 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h1><p><strong>序列化：把对象转换为字节序列的过程称为对象的序列化。<br>反序列化：把字节序列恢复为对象的过程称为对象的反序列化。</strong></p>
+<p>这个Serializable接口，以及相关的东西，全部都在 Java io 里面的       </p>
+<pre><code class="java">
+import sun.jvm.hotspot.debugger.cdbg.LoadObject;
+
+import java.io.*;
+
+
+class Person implements Serializable &#123;
+    private String name;
+    private int age;
+
+    public Person(String name, int age) &#123;
+        this.name = name;
+        this.age = age;
+    &#125;
+
+    public String toString() &#123;
+        return &quot;姓名&quot; + this.name + &quot;、年龄&quot; + this.age;
+    &#125;
+&#125;
+
+public class Demo1 &#123;
+    private static final File SAVE_FILE = new File(&quot;存储位置&quot;);//存储位置
+
+    public static void main(String[] args) throws Exception &#123;
+         saveObject(new Person (&quot;测试&quot;,78) ) ;
+         System.out.println(LoadObject());
+
+    &#125;
+
+    public static void saveObject(Object obj) throws Exception &#123;
+
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVE_FILE));
+        oos.writeObject(obj); //序列化
+        oos.close();
+    &#125;
+
+    public static Object LoadObject() throws Exception &#123;
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVE_FILE));
+        Object obj = ois.readObject(); //反序列化
+        ois.close();
+        return obj;
+    &#125;
+&#125;
+</code></pre>
+<p>谢谢观看～</p>
 
 </div>
 
@@ -941,9 +979,9 @@ class Student2 &#123;
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2021/10/24/02%20Java/04%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+              <a href="/2021/10/25/02%20Java/%E7%A9%BA/">
                   <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  04序列化与反序列化
+                  空
               </a>
             
         </div>
